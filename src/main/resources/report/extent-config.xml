@@ -1,0 +1,124 @@
+<extentreports>
+	<configuration>
+		<!-- report theme -->
+		<!-- standard, dark -->
+		<theme>standard</theme>
+
+		<!-- document encoding -->
+		<!-- defaults to UTF-8 -->
+		<encoding>UTF-8</encoding>
+
+		<!-- protocol for script and stylesheets -->
+		<!-- defaults to https -->
+		<protocol>http</protocol>
+
+		<!-- title of the document -->
+		<documentTitle>Neolians Automation Report</documentTitle>
+
+		<!-- report name - displayed at top-nav -->
+		<reportName>Automation Regression Testing</reportName>
+
+
+		<!-- report headline - displayed at top-nav, after reportHeadline -->
+		<reportHeadline />
+
+		<!-- global date format override ATTENTION => cannot be override otherwise 
+			extentreports cannot append test to an existing file -->
+		<!-- defaults to yyyy-MM-dd -->
+		<dateFormat>yyyy-MM-dd</dateFormat>
+
+		<!-- global time format override -->
+		<!-- defaults to HH:mm:ss -->
+		<timeFormat>HH:mm:ss</timeFormat>
+
+		<!-- custom javascript -->
+
+		<scripts>
+            <![CDATA[
+$(document).ready(function() {
+    $(".logo-content").hide();
+    $(".logo-container").html("Neolians Report");
+    $("span.relaunch" ).each(function() {
+        $( this ).parent().parent().addClass( "relaunch" );
+    });
+    $("span.newStep" ).each(function() {
+        $( this ).parent().parent().addClass( "newStep" );
+    });
+     $("span.beforeEach" ).each(function() {
+        $( this ).parent().parent().addClass( "beforeEach" );
+    });
+    $("span.preRequis" ).each(function() {
+        $( this ).parent().parent().addClass( "preRequis" );
+    });
+     $("span.afterEach" ).each(function() {
+        $( this ).parent().parent().addClass( "afterEach" );
+    });
+     $("span.endTC" ).each(function() {
+        $( this ).parent().parent().addClass( "endTC" );
+    });
+
+    $("td.step-details:contains('Test Succeed:')").each(function() {
+        let li= $( this ).parent();
+        while ( li.get(0).tagName!="LI" && li.get(0).tagName!="HTML"){
+            li= li.parent();
+        }
+        if( li.get(0).tagName==="HTML"){return;}
+        li.removeClass("fail").addClass( "pass" );
+        li.find("span.test-status").each(function() {
+            $(this).removeClass("fail").addClass( "pass" );
+            $(this).text("pass");
+        });
+        const extentid=li.attr("extentid");
+        $("span.category-link[extentid='"+extentid+"']" ).each(function() {
+            let tr= $( this ).parent();
+            while ( tr.get(0).tagName!="TR" && tr.get(0).tagName!="HTML"){
+                tr= tr.parent();
+            }
+            tr.removeClass("fail").addClass( "pass" );
+            tr.find("div.status").each(function() {
+               $(this).removeClass("fail").addClass( "pass" );
+               $(this).text("pass");
+            });
+        });
+    });
+});
+        ]]>
+
+		</scripts>
+
+		<!-- custom styles -->
+		<styles>
+            <![CDATA[
+        iframe{transform: scale(0.5); transform-origin: 0px 0px 0px; height: 300px; width: 300px;}
+		div.report-img{position: absolute; width: 150px; height: 150px; margin-top: -305px;}
+        td.skip, td.skip + td, td.skip + td + td{background-color: #1976D2;color: white !important;}
+        td.fail,td.fail + td,td.fail + td + td{background-color: #ffece6;}
+        .newStep{background-color: #1976D2;color: white !important;}
+        .descItem {margin: 10px;}
+        .descItem img{width:20px; height:20px; display:inline;}
+        .descItem span{margin: 5px;}
+        .descItem a{color: white;}
+        .defectItem {color: firebrick;}
+        .relaunch{background-color:#FF4500;font-weight: bold;}
+        .relaunch td.skip,.relaunch td.skip + td,.relaunch td.skip + td + td{background-color: #FF4500;font-weight: bold;}
+        .beforeEach{background-color:#00cc99;font-weight: bold;}
+        .beforeEach td.unknown,.beforeEach td.unknown + td,.beforeEach td.unknown + td + td{background-color: #00cc99;font-weight: bold;}
+        .afterEach{background-color:#00cc99;font-weight: bold;}
+        .afterEach td.unknown,.afterEach td.unknown + td,.afterEach td.unknown + td + td{background-color: #00cc99;font-weight: bold;}
+        .endTC{background-color:#00cc99;font-weight: bold;}
+        .endTC td.unknown,.endTC td.unknown + td,.endTC td.unknown + td + td{background-color: #00cc99;font-weight: bold;}
+        .services div{float:left;font-size:smaller;padding-right: 5px;}
+        .services div.newService{font-size:inherit;color:green;font-weight: bold;}
+        .services p{clear:both;}
+        .stepDuration{font-size:smaller;}
+        ul.check li::before {display: inline-block;width: 20px;padding-left: 7px;}
+        ul.check .checkKO{background-color:#FF4500;font-weight: bold; color:white}
+        ul.check li.checkKO::before {content: "\1F1FD";}
+        ul.check li.checkOK::before {content: "\2713\0020";}
+        .bugImgOnelineClass{float: right;width: 40px;]
+        .bugImgClass{float: left;width: 50px;}
+
+      ]]>
+		</styles>
+	</configuration>
+</extentreports>

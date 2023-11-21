@@ -1,0 +1,1 @@
+mvn  -Dsut.test.environment=sinext   -Dbrowser=CHROME   -Dbrowser.headless=true   -Dtest=**/*.java   clean compile test

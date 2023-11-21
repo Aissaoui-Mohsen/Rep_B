@@ -1,0 +1,26 @@
+﻿# Fichiers générés par eclipse
+wlm
+debug.log
+reports/
+.allure
+allure-results
+ajcore.*
+target/
+*.iml
+# Fichiers intellij à ne pas synchro (password ou pref perso)
+/.idea
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/dataSources.local.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/shelf/
+.idea/runConfigurations/
+.idea/libraries/
+#Artifiacts selenium
+generated/*.png
+*.class
+index.html
+known_hosts
+*.bak
+
